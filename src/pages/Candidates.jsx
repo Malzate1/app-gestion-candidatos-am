@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { end_points } from "../services/api";
 import { confirm } from "../helpers/alerts";
+import { Link } from "react-router-dom";
 
 function Candidates() {
   const [candidates, setCandidates] = useState([]);
@@ -15,7 +16,9 @@ function Candidates() {
     fetchData();
   }, []);
 
-  console.log(candidates);
+  function deleteCandidate(id) {
+    confirm("Seguro que desea eliminar?", "Esta acción no se podrá revertir", "warning", "Si, eliminar", end_points.candidates, id, fetchData);
+  }
 
   return (
     <div className="space-y-4">
@@ -143,6 +146,7 @@ function Candidates() {
                         Editar
                       </button>
                       <button
+                        onClick={() => deleteCandidate(item.id)}
                         type="button"
                         className="rounded-lg px-3 py-2 text-xs font-semibold border border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100 transition-colors"
                       >

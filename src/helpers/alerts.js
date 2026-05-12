@@ -22,21 +22,37 @@ export function redirect(message, url, icono) {
   });
 }
 
-export function confirm(title, text, icon, textConfirm) {
+export function confirm(
+  title,
+  text,
+  icon,
+  textConfirm,
+  candidates,
+  id,
+  fetchData,
+) {
   Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
+    title: title,
+    text: text,
+    icon: icon,
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
+    confirmButtonText: textConfirm,
   }).then((result) => {
-    if (result.isConfirmed)
+    if (result.isConfirmed) {
+      fetch(candidates + "/" + id, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          fetchData();
+        });
       Swal.fire({
         title: "Deleted!",
         text: "Your file has been deleted.",
         icon: "success",
       });
+    }
   });
 }

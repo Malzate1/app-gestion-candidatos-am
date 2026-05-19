@@ -27,7 +27,7 @@ export let routerApp = [
         element: <CandidateCreate />,
       },
       {
-        path: "edit-candidate/",
+        path: "edit-candidate/:id",
         element: <CandidateEdit />,
       },
     ],

@@ -17,7 +17,15 @@ function Candidates() {
   }, []);
 
   function deleteCandidate(id) {
-    confirm("Seguro que desea eliminar?", "Esta acción no se podrá revertir", "warning", "Si, eliminar", end_points.candidates, id, fetchData);
+    confirm(
+      "Seguro que desea eliminar?",
+      "Esta acción no se podrá revertir",
+      "warning",
+      "Si, eliminar",
+      end_points.candidates,
+      id,
+      fetchData,
+    );
   }
 
   return (
@@ -139,12 +147,13 @@ function Candidates() {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-2">
-                      <button
+                      <Link
+                        to={"/dashboard/edit-candidate/" + item.id}
                         type="button"
                         className="rounded-lg px-3 py-2 text-xs font-semibold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-colors"
                       >
                         Editar
-                      </button>
+                      </Link>
                       <button
                         onClick={() => deleteCandidate(item.id)}
                         type="button"
